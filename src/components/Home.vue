@@ -5,16 +5,22 @@
     <div class="row">
       <div class="col-6">
         <div class="mb-3">
-          <input type="text" class="form-control"
-                 placeholder="What we will watch?"
-                 v-model="taskTitle"
-                 @keyup.enter="newTask">
+          <input 
+            v-model="taskTitle" 
+            type="text"
+            class="form-control"
+            placeholder="What we will watch?"
+            @keyup.enter="newTask">
         </div>
         <div class="mb-3">
-      <textarea class="form-control" name="" id="" cols="30" rows="3"
-                v-model="taskDescription"
-                @keyup.enter="newTask">
-      </textarea>
+          <textarea 
+            id="" 
+            v-model="taskDescription" 
+            class="form-control" 
+            name="" 
+            cols="30"
+            rows="3"
+            @keyup.enter="newTask"/>
         </div>
       </div>
     </div>
@@ -22,36 +28,56 @@
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
       <div class="d-flex col-12 ">
         <div class="custom-control custom-radio mb-3">
-          <input type="radio" id="radioFilm" class="custom-control-input" name="customRadio"
-                 placeholder="What we will watch?"
-                 v-model="whatWatch"
-                 @keyup.enter="newTask" value="Film">
-          <label for="radioFilm" class="custom-control-label">Film</label>
+          <input 
+            id="radioFilm" 
+            v-model="whatWatch" 
+            type="radio" 
+            class="custom-control-input"
+            name="customRadio"
+            placeholder="What we will watch?"
+            value="Film" 
+            @keyup.enter="newTask">
+          <label 
+            for="radioFilm" 
+            class="custom-control-label">Film</label>
         </div>
         <div class="custom-control custom-radio mb-3 ml-5">
-          <input type="radio" id="radioSerial" class="custom-control-input" name="customRadio"
-                 placeholder="What we will watch?"
-                 v-model="whatWatch"
-                 @keyup.enter="newTask" value="Serial">
-          <label for="radioSerial" class="custom-control-label">Serial</label>
+          <input 
+            id="radioSerial" 
+            v-model="whatWatch" 
+            type="radio" 
+            class="custom-control-input"
+            name="customRadio"
+            placeholder="What we will watch?"
+            value="Serial" 
+            @keyup.enter="newTask">
+          <label 
+            for="radioSerial" 
+            class="custom-control-label">Serial</label>
         </div>
       </div>
 
-      <div  v-if="whatWatch === 'Film'">
+      <div v-if="whatWatch === 'Film'">
         <div class="d-flex">
           <div class="form-checks mb-3 col-2">
             <label for="hours">Hours:</label>
-            <input id="hours" type="text" class="form-control"
-                   placeholder=""
-                   v-model="filmHours"
-                   @keyup.enter="newTask">
+            <input 
+              id="hours" 
+              v-model="filmHours" 
+              type="text"
+              class="form-control"
+              placeholder=""
+              @keyup.enter="newTask">
           </div>
           <div class="form-checks mb-3 col-2">
             <label for="mins">Mins:</label>
-            <input id="mins" type="text" class="form-control"
-                   placeholder=""
-                   v-model="filmMinutes"
-                   @keyup.enter="newTask">
+            <input 
+              id="mins" 
+              v-model="filmMinutes" 
+              type="text"
+              class="form-control"
+              placeholder=""
+              @keyup.enter="newTask">
           </div>
           <p class="pt-4 pl-5">Total Film time: {{ filmTime }}</p>
         </div>
@@ -61,24 +87,33 @@
         <div class="d-flex row">
           <div class="form-checks mb-3 col-3">
             <label for="sessons">How many sessons?</label>
-            <input id="sessons" type="text" class="form-control"
-                   placeholder=""
-                   v-model="serialSessons"
-                   @keyup.enter="newTask">
+            <input 
+              id="sessons" 
+              v-model="serialSessons" 
+              type="text"
+              class="form-control"
+              placeholder=""
+              @keyup.enter="newTask">
           </div>
           <div class="form-checks mb-3 col-3">
             <label for="serials">How many series?</label>
-            <input id="serials" type="text" class="form-control"
-                   placeholder=""
-                   v-model="serialSeries"
-                   @keyup.enter="newTask">
+            <input 
+              id="serials" 
+              v-model="serialSeries" 
+              type="text"
+              class="form-control"
+              placeholder=""
+              @keyup.enter="newTask">
           </div>
           <div class="form-checks mb-3 col-4">
             <label for="sermin">How long i one series (min)?</label>
-            <input id="sermin" type="text" class="form-control"
-                   placeholder=""
-                   v-model="serialSeriesMinutes"
-                   @keyup.enter="newTask">
+            <input 
+              id="sermin" 
+              v-model="serialSeriesMinutes" 
+              type="text"
+              class="form-control"
+              placeholder=""
+              @keyup.enter="newTask">
           </div>
           <p> Total Serial time: {{ serialTime }}</p>
         </div>
@@ -87,25 +122,33 @@
 
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
       <div class="tags mb-3">
-        <span class="badge badge-pill badge-info"
-              v-for="tag in tags"
-              :key="tag.title"
-              @click="addUseTag(tag)"
-              :class="{active: tag.use}">
+        <span 
+          v-for="tag in tags"
+          :key="tag.title"
+          :class="{active: tag.use}"
+          class="badge badge-pill badge-info"
+          @click="addUseTag(tag)">
           {{ tag.title }}
         </span>
       </div>
       <div class="mb-4">
-        <div class="btn btn-primary mb-2"
-             @click="tagShowMenu = !tagShowMenu"
-             :class="{active: !tagShowMenu}">Add New Tag
+        <div 
+          :class="{active: !tagShowMenu}"
+          class="btn btn-primary mb-2"
+          @click="tagShowMenu = !tagShowMenu">Add New Tag
         </div>
-        <div class="tag-form d-flex" v-if="tagShowMenu">
-          <input type="text" class="form-control mr-3"
-                 placeholder="New tag"
-                 v-model="tagTitle"
-                 @keyup.enter="newTag">
-          <div class="btn btn-primary" @click="newTag">Send</div>
+        <div 
+          v-if="tagShowMenu" 
+          class="tag-form d-flex">
+          <input 
+            v-model="tagTitle" 
+            type="text"
+            class="form-control mr-3"
+            placeholder="New tag"
+            @keyup.enter="newTag">
+          <div 
+            class="btn btn-primary" 
+            @click="newTag">Send</div>
         </div>
       </div>
       <div class="mb-3">
@@ -114,7 +157,9 @@
     </div>
 
     <div class="float-right mb-4">
-      <div class="btn btn-primary" @click="newTask">Send form</div>
+      <div 
+        class="btn btn-primary" 
+        @click="newTask">Send form</div>
     </div>
   </div>
 </template>
@@ -152,6 +197,16 @@ export default {
           use: false
         }
       ]
+    }
+  },
+  computed: {
+    filmTime () {
+      let min = (this.filmHours * 60) + (this.filmMinutes * 1)
+      return this.getHoursAndMins(min)
+    },
+    serialTime () {
+      let min = this.serialSessons * this.serialSeries * this.serialSeriesMinutes
+      return this.getHoursAndMins(min)
     }
   },
   methods: {
@@ -214,16 +269,6 @@ export default {
       return `${hours} Hours ${min} Minutes`
     }
   },
-  computed: {
-    filmTime () {
-      let min = (this.filmHours * 60) + (this.filmMinutes * 1)
-      return this.getHoursAndMins(min)
-    },
-    serialTime () {
-      let min = this.serialSessons * this.serialSeries * this.serialSeriesMinutes
-      return this.getHoursAndMins(min)
-    }
-  }
 }
 </script>
 

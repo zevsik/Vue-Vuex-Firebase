@@ -4,18 +4,34 @@
 
     <div class="task-list">
 
-      <div class="card" v-for="task in tasks" :key="task.id" :class="{ completed: task.completed }">
+      <div 
+        v-for="task in tasks" 
+        :key="task.id" 
+        :class="{ completed: task.completed }" 
+        class="card">
         <div class="card-body">
-          <button type="button" class="close-btn close" aria-label="Close">
+          <button 
+            type="button" 
+            class="close-btn close" 
+            aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h5 class="card-title"><span>{{ task.whatWatch }}</span> | Total time: </h5>
           <p class="card-text">{{ task.description }}</p>
-          <a href="#" class="btn btn-primary" @click="task.completed = !task.completed">Go somewhere</a>
+          <a 
+            href="#" 
+            class="btn btn-primary" 
+            @click="task.completed = !task.completed">Go somewhere</a>
 
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="task.completed">
-            <label class="form-check-label" for="exampleCheck1">{{ task.title }}</label>
+            <input 
+              id="exampleCheck1" 
+              v-model="task.completed" 
+              type="checkbox" 
+              class="form-check-input">
+            <label 
+              class="form-check-label" 
+              for="exampleCheck1">{{ task.title }}</label>
           </div>
         </div>
       </div>
