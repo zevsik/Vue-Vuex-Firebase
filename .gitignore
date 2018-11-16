@@ -1,0 +1,31 @@
+# Homestead
+Homestead.json
+Homestead.yaml
+
+# Environment deps.
+/.env*
+/*ide*helper*.*
+
+# IDEs
+/nbproject
+/.idea
+
+# Vendors
+/vendor
+/**/node_modules
+
+# Temp dirs & trash
+/temp
+/tmp
+/build
+/.build
+.DS_Store
+.php_cs.cache
+
+# etc.
+/gl-*-report.json
+/storage/*.key
+npm-debug.log
+/node_modules
+/storage/coverage
+
