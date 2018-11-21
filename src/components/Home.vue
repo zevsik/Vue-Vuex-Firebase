@@ -5,19 +5,19 @@
     <div class="row">
       <div class="col-6">
         <div class="mb-3">
-          <input 
-            v-model="taskTitle" 
+          <input
+            v-model="taskTitle"
             type="text"
             class="form-control"
             placeholder="What we will watch?"
             @keyup.enter="newTask">
         </div>
         <div class="mb-3">
-          <textarea 
-            id="" 
-            v-model="taskDescription" 
-            class="form-control" 
-            name="" 
+          <textarea
+            id=""
+            v-model="taskDescription"
+            class="form-control"
+            name=""
             cols="30"
             rows="3"
             @keyup.enter="newTask"/>
@@ -28,31 +28,31 @@
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
       <div class="d-flex col-12 ">
         <div class="custom-control custom-radio mb-3">
-          <input 
-            id="radioFilm" 
-            v-model="whatWatch" 
-            type="radio" 
+          <input
+            id="radioFilm"
+            v-model="whatWatch"
+            type="radio"
             class="custom-control-input"
             name="customRadio"
             placeholder="What we will watch?"
-            value="Film" 
+            value="Film"
             @keyup.enter="newTask">
-          <label 
-            for="radioFilm" 
+          <label
+            for="radioFilm"
             class="custom-control-label">Film</label>
         </div>
         <div class="custom-control custom-radio mb-3 ml-5">
-          <input 
-            id="radioSerial" 
-            v-model="whatWatch" 
-            type="radio" 
+          <input
+            id="radioSerial"
+            v-model="whatWatch"
+            type="radio"
             class="custom-control-input"
             name="customRadio"
             placeholder="What we will watch?"
-            value="Serial" 
+            value="Serial"
             @keyup.enter="newTask">
-          <label 
-            for="radioSerial" 
+          <label
+            for="radioSerial"
             class="custom-control-label">Serial</label>
         </div>
       </div>
@@ -61,9 +61,9 @@
         <div class="d-flex">
           <div class="form-checks mb-3 col-2">
             <label for="hours">Hours:</label>
-            <input 
-              id="hours" 
-              v-model="filmHours" 
+            <input
+              id="hours"
+              v-model="filmHours"
               type="text"
               class="form-control"
               placeholder=""
@@ -71,9 +71,9 @@
           </div>
           <div class="form-checks mb-3 col-2">
             <label for="mins">Mins:</label>
-            <input 
-              id="mins" 
-              v-model="filmMinutes" 
+            <input
+              id="mins"
+              v-model="filmMinutes"
               type="text"
               class="form-control"
               placeholder=""
@@ -87,9 +87,9 @@
         <div class="d-flex row">
           <div class="form-checks mb-3 col-3">
             <label for="sessons">How many sessons?</label>
-            <input 
-              id="sessons" 
-              v-model="serialSessons" 
+            <input
+              id="sessons"
+              v-model="serialSessons"
               type="text"
               class="form-control"
               placeholder=""
@@ -97,9 +97,9 @@
           </div>
           <div class="form-checks mb-3 col-3">
             <label for="serials">How many series?</label>
-            <input 
-              id="serials" 
-              v-model="serialSeries" 
+            <input
+              id="serials"
+              v-model="serialSeries"
               type="text"
               class="form-control"
               placeholder=""
@@ -107,22 +107,22 @@
           </div>
           <div class="form-checks mb-3 col-4">
             <label for="sermin">How long i one series (min)?</label>
-            <input 
-              id="sermin" 
-              v-model="serialSeriesMinutes" 
+            <input
+              id="sermin"
+              v-model="serialSeriesMinutes"
               type="text"
               class="form-control"
               placeholder=""
               @keyup.enter="newTask">
           </div>
-          <p> Total Serial time: {{ serialTime }}</p>
+          <p class="pl-3">Total Serial time: {{ serialTime }}</p>
         </div>
       </div>
     </div>
 
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
       <div class="tags mb-3">
-        <span 
+        <span
           v-for="tag in tags"
           :key="tag.title"
           :class="{active: tag.use}"
@@ -131,34 +131,36 @@
           {{ tag.title }}
         </span>
       </div>
+
       <div class="mb-4">
-        <div 
+        <div
           :class="{active: !tagShowMenu}"
           class="btn btn-primary mb-2"
           @click="tagShowMenu = !tagShowMenu">Add New Tag
         </div>
-        <div 
-          v-if="tagShowMenu" 
+        <div
+          v-if="tagShowMenu"
           class="tag-form d-flex">
-          <input 
-            v-model="tagTitle" 
+          <input
+            v-model="tagTitle"
             type="text"
             class="form-control mr-3"
             placeholder="New tag"
             @keyup.enter="newTag">
-          <div 
-            class="btn btn-primary" 
+          <div
+            class="btn btn-primary"
             @click="newTag">Send</div>
         </div>
       </div>
+
       <div class="mb-3">
         {{ tagsUsed }}
       </div>
     </div>
 
     <div class="float-right mb-4">
-      <div 
-        class="btn btn-primary" 
+      <div
+        class="btn btn-primary"
         @click="newTask">Send form</div>
     </div>
   </div>
@@ -169,7 +171,6 @@ export default {
   data () {
     return {
       taskTitle: '',
-      taskID: 3,
       taskDescription: '',
       whatWatch: 'Film',
 
@@ -182,24 +183,13 @@ export default {
 
       tagTitle: '',
       tagShowMenu: false,
-      tagsUsed: [],
-      tags: [
-        {
-          title: 'JS',
-          use: false
-        },
-        {
-          title: 'RequireJS',
-          use: false
-        },
-        {
-          title: 'CommonJS',
-          use: false
-        }
-      ]
+      tagsUsed: []
     }
   },
   computed: {
+    tags () {
+      return this.$store.getters.tags
+    },
     filmTime () {
       let min = (this.filmHours * 60) + (this.filmMinutes * 1)
       return this.getHoursAndMins(min)
@@ -214,14 +204,11 @@ export default {
       if (this.tagTitle === '') {
         return
       }
-      this.tags.push({
-        title: this.tagTitle,
-        used: false
-      })
       const tag = {
-        title: this.tagTitle
+        title: this.tagTitle,
+        use: false
       }
-      console.log(tag)
+      this.$store.dispatch('newTag', tag)
     },
     newTask () {
       if (this.taskTitle === '') {
@@ -234,30 +221,35 @@ export default {
         time = this.serialTime
       }
       const task = {
-        id: this.taskID,
         title: this.taskTitle,
         description: this.taskDescription,
         whatWatch: this.whatWatch,
         time,
-        tagsUsed: this.tagsUsed,
+        tags: this.tagsUsed,
         completed: false,
         editing: false
       }
 
+      this.$store.dispatch('newTask', task)
+
       console.log(task)
 
       // Reset
-      this.taskID += 1
       this.taskTitle = ''
       this.taskDescription = ''
       this.tagsUsed = []
+
+      for (let i = 0; i < this.tags.length; i++) {
+        this.tags[i].use = false
+      }
     },
     addUseTag (tag) {
       tag.use = !tag.use
 
       if (tag.use) {
-        this.tagsUsed.push(
-          tag.title
+        this.tagsUsed.push({
+            title: tag.title
+          }
         )
       } else {
         this.tagsUsed.splice(tag.title, 1)
